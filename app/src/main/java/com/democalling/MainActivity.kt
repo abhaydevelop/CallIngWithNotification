@@ -109,9 +109,16 @@ class MainActivity : AppCompatActivity(), AdapterUserList.callback {
         }
 
         binding.switchCameraButton.setOnClickListener {
-            val isCameraMuted = binding.muteButton.tag == "camera"
-            binding.switchCameraButton.setImageResource(if (isCameraMuted) R.drawable.camera else R.drawable.cameraoff)
-            binding.switchCameraButton.tag = if (isCameraMuted) "unmuted" else "muted"
+            val isCameraMuted = binding.switchCameraButton.tag == "camera Off"
+            if (isCameraMuted){
+                // Set up CameraX when the activity is created
+                setUpCamera("FRONT")
+            }else{
+                // Set up CameraX when the activity is created
+                setUpCamera("BACK")
+            }
+//            binding.switchCameraButton.setImageResource(if (isCameraMuted) R.drawable.camera else R.drawable.cameraoff)
+            binding.switchCameraButton.tag = if (isCameraMuted) "camera On" else "camera Off"
             Toast.makeText(this, "Switching Camera...", Toast.LENGTH_SHORT).show()
         }
 
@@ -250,7 +257,7 @@ class MainActivity : AppCompatActivity(), AdapterUserList.callback {
                 binding.relativeLayout.visibility = View.VISIBLE
 
                 // Set up CameraX when the activity is created
-                setUpCamera()
+                setUpCamera("FRONT")
 
             }
 
@@ -263,49 +270,48 @@ class MainActivity : AppCompatActivity(), AdapterUserList.callback {
         }
     }
 
-    private fun setUpCamera() {
+    private fun setUpCamera(cameraFlip : String) {
         // Initialize CameraX and bind the camera lifecycle
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
 
+            // Unbind any previously bound use cases
+            try {
+                cameraProvider.unbindAll()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Failed to unbind previous camera: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
             // Set up Camera Selector
-            cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA // Use front camera by default
+            cameraSelector = if (cameraFlip == "FRONT") {
+                CameraSelector.DEFAULT_FRONT_CAMERA // Use front camera
+            } else {
+                CameraSelector.DEFAULT_BACK_CAMERA // Use back camera
+            }
 
             // Set up Preview use case
             preview = Preview.Builder().build()
 
-            camera = cameraProvider.bindToLifecycle(
-                this,
-                cameraSelector,
-                preview
-            )
-
-            // Get CameraInfo and create the SurfaceProvider
-            val cameraInfo = camera.cameraInfo
-
-            // Set the surface provider to the PreviewView in the layout
-            val surfaceProvider = binding.previewView.createSurfaceProvider(cameraInfo)
-            preview.setSurfaceProvider(surfaceProvider)
-
-            // Bind the camera provider to the lifecycle
+            // Bind the camera to lifecycle
             try {
-                // Unbind all use cases before rebinding
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview
+                camera = cameraProvider.bindToLifecycle(
+                    this, // LifecycleOwner (e.g., Activity or Fragment)
+                    cameraSelector, // CameraSelector (front or back)
+                    preview // Preview use case
                 )
+
+                // Set the surface provider to the PreviewView in the layout
+                val cameraInfo = camera.cameraInfo
+                val surfaceProvider = binding.previewView.createSurfaceProvider(cameraInfo)
+                preview.setSurfaceProvider(surfaceProvider)
+
             } catch (e: Exception) {
-                Toast.makeText(
-                    this,
-                    "Camera initialization failed: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Camera initialization failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }, ContextCompat.getMainExecutor(this))
+
     }
 
     override fun CallBackCalling(audioCall: Boolean, videoCall: Boolean, inComingCall: Boolean) {

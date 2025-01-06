@@ -191,7 +191,7 @@
                     android:scaleType="fitXY"
                     android:background="@drawable/rounded_button"
                     android:contentDescription="Switch Camera"
-                    android:src="@drawable/cameraoff"
+                    android:src="@drawable/camera"
                     android:visibility="gone"
                     app:tint="@android:color/white" />
 
