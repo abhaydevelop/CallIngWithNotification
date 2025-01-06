@@ -1,0 +1,6 @@
+
+kotlin:S1172×"6Remove this unused function parameter "incommingCall".(Êï—şøÿÿÿÿ8á˜áÃ2J$78b797ac-f3f1-45ea-8355-211aba3f5a3e
+•kotlin:S101ì"KRename class "callback" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(Í×éÙıÿÿÿÿ8»á˜áÃ2J$3724e5c9-ef7e-44ab-b2a9-15d130fb29f5
+–kotlin:S65162"LReplace explicit functional interface implementation with lambda expression.(ù×„³ıÿÿÿÿ8Çá˜áÃ2J$1ee6e603-8257-4d37-814f-3c5139e10ee2
+kotlin:S6517ì"BMake this interface functional or replace it with a function type.(Í×éÙıÿÿÿÿ8Èá˜áÃ2J$abfd58fc-9f7e-4d34-87d0-b051f8570d2a
+ˆkotlin:S6511¹"=Merge chained "if" statements into a single "when" statement.(ÒïÏÁúÿÿÿÿ8Ëá˜áÃ2J$3c9c1dfc-5ee4-45ca-8fed-a1d827712709
