@@ -31,6 +31,9 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), AdapterUserList.callback {
 
@@ -129,6 +132,48 @@ class MainActivity : AppCompatActivity(), AdapterUserList.callback {
 
         // Initialize UI to Idle state
         updateUI(CallState.IDLE)
+
+
+        // Make the API call
+        RetrofitClient.apiService.getUsers().enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                if (response.isSuccessful) {
+                    // Handle successful response
+                    val users = response.body()
+                    users?.forEach {
+                        println("User: ${it.name}")
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Error: ${response.code()}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                // Handle failure
+                Toast.makeText(applicationContext, "Failure: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        // Make the API call
+        RetrofitClient.apiService.getPostById(1).enqueue(object : Callback<Post> {
+            override fun onResponse(call: Call<Post>, response: Response<Post>) {
+                if (response.isSuccessful) {
+                    val post = response.body()
+                    // Handle the post data here
+                    post?.let {
+                        println("Post Title: ${it.title}")
+                        println("Post Body: ${it.body}")
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Error: ${response.code()}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Post>, t: Throwable) {
+                // Handle failure
+                Toast.makeText(applicationContext, "Failure: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -498,4 +543,6 @@ class AdapterUserList(
     interface callback {
         fun CallBackCalling(audioCall: Boolean, videoCall: Boolean, incommingCall: Boolean)
     }
+
+
 }

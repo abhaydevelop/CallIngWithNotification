@@ -1,7 +1,8 @@
 
-kotlin:S1172Ş"6Remove this unused function parameter "incommingCall".(Êï—şøÿÿÿÿ8Ü‰ãÃ2J$655cfd67-1268-479e-b0a9-d69c28b64636
-hkotlin:S125x"Remove this commented out code.(ÆİºÔüÿÿÿÿ8Àı‰ãÃ2J$7c731357-b063-4c7f-8972-d4f975726b60
-•kotlin:S101ò"KRename class "callback" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(Í×éÙıÿÿÿÿ8ÇÜ‰ãÃ2J$b5684d10-ae6f-4774-a296-ebd467687fc1
-–kotlin:S65162"LReplace explicit functional interface implementation with lambda expression.(ù×„³ıÿÿÿÿ8Çá˜áÃ2J$336bc006-6003-4ca9-a69f-f9b851a96119
-kotlin:S6517ò"BMake this interface functional or replace it with a function type.(Í×éÙıÿÿÿÿ8ÕÜ‰ãÃ2J$1aeb7bb6-08be-4a3d-af28-55dbd5c82327
-ˆkotlin:S6511¿"=Merge chained "if" statements into a single "when" statement.(ÒïÏÁúÿÿÿÿ8ÙÜ‰ãÃ2J$fafe6628-cbc0-400f-bcac-e3df7067818e
+kotlin:S1172‹"6Remove this unused function parameter "incommingCall".(Êï—şøÿÿÿÿ8Ü‰ãÃ2J$0067e438-0181-4446-8a49-a3274db09973
+hkotlin:S125{"Remove this commented out code.(ÆİºÔüÿÿÿÿ8Àı‰ãÃ2J$3362eb3b-3024-4a27-b35c-79432c01d508
+•kotlin:S101Ÿ"KRename class "callback" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(Í×éÙıÿÿÿÿ8ÇÜ‰ãÃ2J$ff1b51c2-7f15-4a72-a8b3-42aaba312625
+œkotlin:S3776H"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¶Á»¬şÿÿÿÿ8ŸµÌËÅ2J$0531a2d9-276f-41d2-bef3-bf60ab85103a
+–kotlin:S65165"LReplace explicit functional interface implementation with lambda expression.(ù×„³ıÿÿÿÿ8Çá˜áÃ2J$9b924b10-a667-44c1-ae45-e4ddffb0a904
+kotlin:S6517Ÿ"BMake this interface functional or replace it with a function type.(Í×éÙıÿÿÿÿ8ÕÜ‰ãÃ2J$11159fa7-8ce7-483d-9330-ed909497a96d
+ˆkotlin:S6511ì"=Merge chained "if" statements into a single "when" statement.(ÒïÏÁúÿÿÿÿ8ÙÜ‰ãÃ2J$3e05efe6-acd5-4ef7-ab96-3c5e2f51ed31
